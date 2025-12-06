@@ -1,0 +1,8 @@
+{
+    "monero_rpc_host": "127.0.0.1",
+    "monero_rpc_port": 18085,
+    "monero_rpc_user": "",
+    "monero_rpc_password": "",
+    "monero_daemon_host": "127.0.0.1",
+    "monero_daemon_port": 18081
+}
