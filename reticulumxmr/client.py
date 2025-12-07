@@ -34,10 +34,12 @@ from .view_key_protocol import (
 from .config import Config
 
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+    level=logging.WARNING,
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    stream=sys.stderr
 )
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 APP_NAME = "reticulumxmr"
 
