@@ -41,6 +41,7 @@ setup(
         "console_scripts": [
             "reticulumxmr-hub=reticulumxmr.hub:main",
             "reticulumxmr-client=reticulumxmr.client:main",
+            "reticulumxmr-tui=reticulumxmr.tui:main",
         ],
     },
 )

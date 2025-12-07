@@ -223,6 +223,20 @@ rnsd
 
 ### Step 5: Connect to hub
 
+**Option A: TUI (recommended)**
+
+```bash
+source venv/bin/activate
+reticulumxmr-tui <hub-destination-hash>
+```
+
+The TUI provides an interactive interface for checking balance and sending transactions. Controls:
+- `R` - Refresh balance
+- `S` - Send XMR (prompts for address and amount)
+- `Q` - Quit
+
+**Option B: CLI commands**
+
 ```bash
 source venv/bin/activate
 
@@ -281,7 +295,7 @@ Transactions are feasible over slow radio links.
 
 - [x] Balance queries
 - [x] Transaction broadcast
-- [ ] TUI interface
+- [x] TUI interface
 - [ ] LoRa testing
 - [ ] HF radio testing
 - [ ] Multi-wallet hub support
