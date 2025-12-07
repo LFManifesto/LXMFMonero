@@ -65,6 +65,10 @@ class ReticulumXMRHub:
         # Set up link callback
         self.destination.set_link_established_callback(self._link_established)
 
+        # Announce the destination so clients can find us
+        self.destination.announce()
+        logger.info("Destination announced to network")
+
         # Wallet RPC URL for cold signing
         rpc_host = self.config.get("monero_rpc_host", "127.0.0.1")
         rpc_port = self.config.get("monero_rpc_port", 18085)
