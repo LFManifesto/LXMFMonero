@@ -40,6 +40,7 @@ setup(
     entry_points={
         "console_scripts": [
             "reticulumxmr-hub=reticulumxmr.hub:main",
+            "reticulumxmr-client=reticulumxmr.client:main",
         ],
     },
 )
