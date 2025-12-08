@@ -4,6 +4,20 @@
 
 LXMFMonero enables Monero wallet operations over Reticulum mesh networks using LXMF (Lightweight Extensible Message Format) for reliable message delivery. This allows financial sovereignty even in environments without traditional internet connectivity.
 
+## Status
+
+**Testing in Progress** - Core functionality verified over 2-hop public testnet.
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Balance queries | ✅ Verified | 2-4 second round-trip over testnet |
+| Export outputs | ✅ Verified | 638 bytes delivered |
+| Create unsigned tx | ✅ Verified | 6.5KB payloads work |
+| Sign transaction | ✅ Verified | Cold wallet signing works |
+| Submit transaction | ✅ Verified | Format correct, broadcasts to daemon |
+| I2P transport | 🔄 Pending | Next test phase |
+| LoRa/HF transport | 🔄 Pending | Future testing |
+
 ## Features
 
 - **Cold Signing Workflow**: Private keys never leave your device
@@ -114,13 +128,26 @@ Each step is an independent LXMF message - no persistent connection required.
 
 All data sizes are compatible with LXMF's automatic Resource handling:
 
-| Data | Size |
-|------|------|
-| Balance response | ~500 bytes |
-| Export outputs | ~240 bytes |
-| Unsigned tx | 2-4 KB |
-| Signed tx | ~4 KB |
-| Key images | ~500 bytes per |
+| Data | Size | Verified |
+|------|------|----------|
+| Balance response | ~500 bytes | ✅ |
+| Export outputs | ~640-820 bytes | ✅ |
+| Unsigned tx | 6-7 KB | ✅ |
+| Signed tx | 12-13 KB | ✅ |
+| Key images | ~500 bytes per | - |
+
+## Tested Configuration
+
+Successfully tested over Reticulum public testnet:
+
+```
+Mac (cold wallet) → Amsterdam Testnet → Pi (hub + monerod)
+                        2 hops
+```
+
+- **Transport**: TCPInterface to amsterdam.connect.reticulum.network:4965
+- **Round-trip**: 2-4 seconds for balance queries
+- **Large payloads**: 12KB+ signed transactions delivered reliably
 
 ## Security Notes
 

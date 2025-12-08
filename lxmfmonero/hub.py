@@ -401,27 +401,22 @@ class MoneroHub:
     def _handle_submit_tx(self, request: SubmitTxRequest) -> SubmitTxResponse:
         """Handle submit signed transaction request"""
         logger.info(f"Submit tx from operator: {request.operator_id}")
+        logger.debug(f"Signed txset length: {len(request.signed_txset)}")
 
         tx_hash = None
         error_msg = None
 
-        # Try submit_transfer first (for cold-signed transactions)
+        # Use submit_transfer for cold-signed transactions
         result = self.wallet_rpc.submit_transfer(request.signed_txset)
+        logger.debug(f"submit_transfer result: {result}")
 
         if "error" not in result:
             tx_result = result.get("result", {})
             tx_hash_list = tx_result.get("tx_hash_list", [])
             tx_hash = tx_hash_list[0] if tx_hash_list else ""
         else:
-            # Try relay_tx as fallback
-            logger.info("submit_transfer failed, trying relay_tx...")
-            result = self.wallet_rpc.relay_tx(request.signed_txset)
-
-            if "error" not in result:
-                tx_hash = result.get("result", {}).get("tx_hash", "")
-            else:
-                error_msg = result["error"].get("message", str(result["error"]))
-                logger.error(f"Failed to submit tx: {error_msg}")
+            error_msg = result["error"].get("message", str(result["error"]))
+            logger.error(f"Failed to submit tx: {error_msg}")
 
         if tx_hash:
             logger.info(f"Transaction broadcast: {tx_hash}")
