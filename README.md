@@ -11,20 +11,28 @@ LXMFMonero enables Monero wallet operations over Reticulum mesh networks using L
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Balance queries | ✅ Working | 2-4 second round-trip over testnet |
-| Export outputs | ✅ Working | ~7 seconds over 2 hops |
+| Export outputs | ✅ Working | ~7 seconds over TCP, ~18s over I2P |
 | Create unsigned tx | ✅ Working | 6-7KB payloads work |
 | Sign transaction | ✅ Working | Cold wallet signing works |
 | Submit transaction | ✅ Working | **Broadcast confirmed on mainnet** |
 | Key image sync | ✅ Working | Automatic after tx |
-| I2P transport | 🔄 Pending | Next test phase |
+| I2P transport | ✅ Working | **Full transaction verified** |
 | LoRa/HF transport | 🔄 Pending | Future testing |
 
-### Verified Transaction
+### Verified Transactions
 
+**TCP/Testnet (2 hops):**
 ```
 TX Hash: 8f0295261a2ec04c6d4dcf0c9cc6b30278ab50caf9f6d27a61b562e6f3ebd761
-Route:   Mac → BetweenTheBorders testnet (2 hops) → Pi-1 → monerod
-Time:    ~20 seconds total round-trip
+Route:   Mac → BetweenTheBorders testnet → Pi-1 → monerod
+Time:    ~20 seconds
+```
+
+**I2P (anonymous):**
+```
+TX Hash: a793ff7bd6a0a4b168f72726e2027d283cc5fed0c8c3b1cd6693c6ef7a6fa8ee
+Route:   Mac → I2P tunnel → Pi-1 → monerod
+Time:    ~35 seconds
 ```
 
 ## Features
